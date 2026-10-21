@@ -5,3 +5,84 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>一息千星 · A Breath of Stars</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <!-- Control Sidebar -->
+    <div class="sidebar">
+        <h1>一息千星<br><small style="font-size:.42em;letter-spacing:.16em;font-weight:400;opacity:.6">A BREATH OF STARS</small></h1>
+        <div class="subtitle">呼吸的蒲公英。黄金角花球被阵风吹散,漂浮在会随冷暖呼吸的液态金属波纹之上。点击画面,吹一口气。</div>
+
+        <!-- Seed Section -->
+        <div class="control-section">
+            <h3>Seed</h3>
+            <input type="number" id="seed-input" class="seed-input" value="12345" onchange="updateSeed()" aria-label="Seed">
+            <div class="seed-controls">
+                <button class="button secondary" onclick="previousSeed()">← Prev</button>
+                <button class="button secondary" onclick="nextSeed()">Next →</button>
+            </div>
+            <button class="button tertiary regen-button" onclick="randomSeedAndUpdate()">↻ Random</button>
+        </div>
+
+        <!-- Parameters Section (generated from CONTROLS) -->
+        <div class="control-section">
+            <h3>Parameters</h3>
+            <div id="param-controls"></div>
+        </div>
+
+        <!-- Colors Section -->
+        <div class="control-section">
+            <h3>Colors</h3>
+            <div class="color-group">
+                <label>冷调 Cool</label>
+                <div class="color-picker-container">
+                    <input type="color" id="color1" value="#1a35e8" onchange="updateColor('color1', this.value)">
+                    <span class="color-value" id="color1-value">#1a35e8</span>
+                </div>
+            </div>
+            <div class="color-group">
+                <label>暖调 Warm</label>
+                <div class="color-picker-container">
+                    <input type="color" id="color2" value="#e0569e" onchange="updateColor('color2', this.value)">
+                    <span class="color-value" id="color2-value">#e0569e</span>
+                </div>
+            </div>
+            <div class="color-group">
+                <label>高光 Highlight</label>
+                <div class="color-picker-container">
+                    <input type="color" id="color3" value="#f4e3ff" onchange="updateColor('color3', this.value)">
+                    <span class="color-value" id="color3-value">#f4e3ff</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions Section -->
+        <div class="control-section">
+            <h3>Actions</h3>
+            <div class="button-row">
+                <button class="button" onclick="blow()">吹一口气</button>
+                <button class="button secondary" id="pause-btn" onclick="togglePause()">暂停</button>
+                <button class="button tertiary" onclick="resetParameters()">Reset</button>
+            </div>
+            <div class="button-row" style="margin-top:8px">
+                <button class="button" id="prism-btn" onclick="togglePrism()">棱镜模式</button>
+                <button class="button secondary" onclick="toggleShow()">展示模式</button>
+            </div>
+            <div class="hint">棱镜模式:背景纯黑,花球缩到约 1.1cm 并在旁边分裂出第二朵,带蓝色细闪;屏幕上出现 3cm 定位框。把方形分光棱镜放在框里;拖动画面可移动花球位置,点一下是吹风。定位框大小不对时,调"屏幕像素/厘米"。展示模式会隐藏控制面板并尝试全屏。</div>
+            <div class="hint">同一个 seed 永远演出同一场风:固定时间步长,可复现。</div>
+        </div>
+    </div>
+
+    <button class="button exit-show" onclick="toggleShow()">退出展示</button>
+
+    <!-- Main Canvas Area -->
+    <div class="canvas-area">
+        <div id="canvas-container">
+            <div class="loading">Initializing generative art...</div>
+        </div>
+    </div>
+</div>
+<script src="sketch.js"></script>
+</body>
+</html>
